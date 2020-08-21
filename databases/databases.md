@@ -26,7 +26,7 @@ Some images are in .exr format, and some are in .hdr format, we use FileStar to 
 
 All the collected HDR images are unlabeled, that is, we don't have the ground-truth LDR images. For each HDR image, we apply 30 TMOs in MATLAB (29 provided by HDR ToolBox and another is tonemap function) to get 30 LDR images, and select the one with highest TMQI as the ground-truth image, discard the other 29 LDR images.
 
-We use this method the generate target 256 * 256 LDR images and target 1024 * 1024 LDR images.
+We use this method the generate target 256 * 256 LDR images and target 1024 * 1024 LDR images (generating the target 1024 * 1024 LDR images will cost a lot of time).
 
 
 
