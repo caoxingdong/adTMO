@@ -1,13 +1,5 @@
 # -*- coding: utf-8 -*-
-"""
-Created on Mon Jun 22 16:25:29 2020
 
-@author: admin
-"""
-
-'''
-256 * 256 * 3, no luminance channel
-'''
 import os 
 
 import numpy as np
@@ -35,10 +27,6 @@ from keras.initializers import RandomNormal
 from keras import activations
 
 from keras.applications import VGG19
-# from keras.applications.vgg19 import preprocess_input
-# from functools import partial
-
-# import matplotlib.pyplot as plt
 
 import tensorflow as tf
 from keras.engine.topology import Layer
@@ -61,9 +49,6 @@ class GAN_model():
         self.patch_row = self.image_row // 16
         self.patch_col = self.image_col // 16
         self.patch_shape = (self.train_batch_size, self.patch_row, self.patch_col, 1)
-        # self.luminance_weights = [0.2126, 0.7152, 0.0722] # used in matlab lum function
-        # self.luminance_weights = [0.2959, 0.5870, 0.1140] # used in deepTMO
-        # self.init = RandomNormal(stddev=0.02)
         
         self.train_file_name = 'train_image_pairs.npz'
         if not os.path.exists(self.train_file_name):
@@ -86,8 +71,6 @@ class GAN_model():
        
         self.train_data_generator = self.train_data_loader()
         self.test_data_generator = self.test_data_loader()
-        # self.large_test_g = self.large_test_loader()
-        
     def build_d(self):
         features = []
         init = RandomNormal(stddev=0.02)
