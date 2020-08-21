@@ -34,6 +34,6 @@ We use this method the generate target 256 * 256 LDR images and target 1024 * 10
 
 For training, we use 256 * 256 resolution images, which come from two ways: 1. resizing original HDR images into 256 * 256 resolution; 2. resizing original HDR images into 1024 * 1024 resolution, and randomly cropping 256 * 256 resolution regions from it. 
 
-![train](C:\Users\xdcao\Documents\GitHub\adTMO\databases\imgs\train.png)
+![train](https://github.com/caoxingdong/adTMO/blob/master/databases/imgs/train.png?raw=true)
 
 For testing, we use resized 256 * 256 resolution images and resized 1024* 2048 resolution images.
