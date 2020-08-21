@@ -1,4 +1,4 @@
-##### HDR image databases:
+### HDR image databases:
 
 All the HDR images are collected online
 
@@ -20,9 +20,7 @@ Some images are in .exr format, and some are in .hdr format, we use FileStar to 
 
 
 
-
-
-##### Target LDR images
+### Target LDR images
 
 All the collected HDR images are unlabeled, that is, we don't have the ground-truth LDR images. For each HDR image, we apply 30 TMOs in MATLAB (29 provided by HDR ToolBox and another is tonemap function) to get 30 LDR images, and select the one with highest TMQI as the ground-truth image, discard the other 29 LDR images.
 
@@ -30,7 +28,7 @@ We use this method the generate target 256 * 256 LDR images and target 1024 * 10
 
 
 
-##### Resizing and cropping
+### Resizing and cropping
 
 For training, we use 256 * 256 resolution images, which come from two ways: 1. resizing original HDR images into 256 * 256 resolution; 2. resizing original HDR images into 1024 * 1024 resolution, and randomly cropping 256 * 256 resolution regions from it. 
 
