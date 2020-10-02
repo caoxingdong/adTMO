@@ -4,12 +4,71 @@
 	<title>adTMO demo</title>
 	<link rel="stylesheet" type="text/css" href="demo.css">
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-
+	<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+	<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
 	<div class="container">		
-		<h1>This is the demo page</h1>
+		<h1>adTMO Demo Page</h1>
+		<blockquote class="blockquote">
+			<p class="mb-0">This is the demo page of our accepted paper: Adversarial and Adaptive Tone Mapping Operator for High Dynamic Range Images in <a href="http://www.ieeessci2020.org/">SSCI 2020</a>.</p>
+		</blockquote>
+		<p></p>
 
+		<h2>Abstract</h2>
+		<blockquote class="blockquote">
+			<p class="mb-0">This work addresses tone mapping, a common approach to convert high dynamic range (HDR) images into low dynamic range (LDR) images. We approach this problem by using adaptive tone mapping. We propose to deploy a conditional generative adversarial networks to build an adversarial and adaptive tone mapping operator (adTMO) that  converts HDR  into LDR images. We use an objective quality metric called the Tone Mapped Image Quality Index (TMQI) to evaluate our adTMO. Trained with \(256 * 256\) images, adTMO is able to generate \(256 * 256\) and high-resolution \(1024 * 2048\) LDR images. Given \(1024 * 2048\) HDR images, TMQI of the generated LDR images reaches the value of \(0.90 \pm 0.06\), which outperforms all other contemporary tone mapping operators.</p>
+		</blockquote>
+
+		<h2>Introduction</h2>
+		<hr>
+		<h2>Dataset</h2>
+		<hr>
+		<h2>Network</h2>
+		<h4>Network Structure</h4>
+		<div class="card mb-1" style="width: 100%;">
+			<img src="https://github.com/caoxingdong/adTMO/blob/master/results/imgs/newtork/GAN.png?raw=true" class="card-img-top" alt="...">
+			<div class="card-body">
+			    <p class="card-title text-center " style="font-weight: bold;">Training process of adTMO</p>
+			    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+		  	</div>
+		</div>
+		<div class="card mb-1" style="width: 100%;">
+			<img src="https://github.com/caoxingdong/adTMO/blob/master/results/imgs/newtork/G.png?raw=true" class="card-img-top" alt="...">
+			<div class="card-body">
+			    <p class="card-title text-center " style="font-weight: bold;">Training process of adTMO</p>
+			    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+		  	</div>
+		</div>
+		<div class="card mb-1" style="width: 100%;">
+			<img src="https://github.com/caoxingdong/adTMO/blob/master/results/imgs/newtork/D.png?raw=true" class="card-img-top" alt="...">
+			<div class="card-body">
+			    <p class="card-title text-center " style="font-weight: bold;">Training process of adTMO</p>
+			    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+		  	</div>
+		</div>
+
+		<h4>Loss Function</h4>
+		<p> When \(a \ne 0\), there are two solutions to \(ax^2 + bx + c = 0\) and they are \[x = {-b \pm \sqrt{b^2-4ac} \over 2a}.\]</p>
+		<p>cGAN loss: \[L_{cGAN} = E_{(x,y)}logD(x,y)\]</p>
+		<h4>Training and Testing Schemes</h4>
+		<div class="card mb-1" style="width: 100%;">
+			<img src="https://github.com/caoxingdong/adTMO/blob/master/results/imgs/newtork/train.png?raw=true" class="card-img-top" alt="...">
+			<div class="card-body">
+			    <p class="card-title text-center " style="font-weight: bold;">Training process of adTMO</p>
+			    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+		  	</div>
+		</div>
+		<div class="card mb-1" style="width: 100%;">
+			<img src="https://github.com/caoxingdong/adTMO/blob/master/results/imgs/newtork/test.png?raw=true" class="card-img-top" alt="...">
+			<div class="card-body">
+			    <p class="card-title text-center " style="font-weight: bold;">Training process of adTMO</p>
+			    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+		  	</div>
+		</div>
+		
+		<hr>
+		<h2>Results</h2>
 		<div class="row">
 
 			<div class="container col-xs-12 col-md-6 col-lg-3 p-0">
@@ -178,6 +237,17 @@
 				</div>
 			</div>	
 
+		</div>
+
+		<div class="row no-gutters bg-light position-relative">
+			<div class="col-md-6 mb-md-0 p-md-4">
+		    	<img src="..." class="w-100" alt="...">
+		  	</div>
+		  	<div class="col-md-6 position-static p-4 pl-md-0">
+		    	<h5 class="mt-0">Columns with stretched link</h5>
+		    	<p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</p>
+		    	<a href="#" class="stretched-link">Go somewhere</a>
+			</div>
 		</div>
 
 	</div>
