@@ -11,18 +11,55 @@
 	<div class="container">		
 		<h1>adTMO Demo Page</h1>
 		<blockquote class="blockquote">
-			<p class="mb-0">This is the demo page of our accepted paper: Adversarial and Adaptive Tone Mapping Operator for High Dynamic Range Images in <a href="http://www.ieeessci2020.org/">SSCI 2020</a>.</p>
+			<p class="mb-0">This is the demo page of our accepted paper: Adversarial and Adaptive Tone Mapping Operator for High Dynamic Range Images in <a href="http://www.ieeessci2020.org/">SSCI 2020</a>. (References can be found in the paper)</p>
 		</blockquote>
-		<p></p>
 
 		<h2>Abstract</h2>
 		<blockquote class="blockquote">
 			<p class="mb-0">This work addresses tone mapping, a common approach to convert high dynamic range (HDR) images into low dynamic range (LDR) images. We approach this problem by using adaptive tone mapping. We propose to deploy a conditional generative adversarial networks to build an adversarial and adaptive tone mapping operator (adTMO) that  converts HDR  into LDR images. We use an objective quality metric called the Tone Mapped Image Quality Index (TMQI) to evaluate our adTMO. Trained with \(256 * 256\) images, adTMO is able to generate \(256 * 256\) and high-resolution \(1024 * 2048\) LDR images. Given \(1024 * 2048\) HDR images, TMQI of the generated LDR images reaches the value of \(0.90 \pm 0.06\), which outperforms all other contemporary tone mapping operators.</p>
-		</blockquote>
+		</blockquote>		
+		<p class="text-right"></p>
 
 		<h2>Introduction</h2>
+		<h4>Dynamic Range</h4>
+		<blockquote class="blockquote">
+			<p class="mb-0">Dynamic range of an image refers to the variation in luminance from the brightest to the darkest areas.</p>
+		</blockquote>
+		<h4>High Dynamic Range (HDR) Images and Ligh Dynamic Range (LDR) Images</h4>
+		<blockquote class="blockquote">
+			<p class="mb-0">Most images use 8-bit to represent 1 pixel for each of RGB channels, the dynamic range of such images is 255, and they are categorized as LDR images. Some images use 16, 32 or even more bits to represent 1 pixel, such images are categorized as HDR images. Though HDR images more accurately match with the scene they are intended to represent, most common displays are unable to display such images, therefore, such images must be converted from HDR to LDR before displaying.</p>
+		</blockquote>
+		<div class="row"></div>
+		<h4>Tone Mapping Operators (TMOs)</h4>
+		<h4>Tone-Mapped Image Quality Index (TMQI)</h4>
 		<hr>
 		<h2>Dataset</h2>
+		<h4>HDR Dataset</h4>
+		<blockquote class="blockquote">
+			<p class="mb-0">All the HDR datasets are collected from Internet and literature reviews. Here I list all the HDR datasets used in this paper.</p>
+		</blockquote>
+
+		<ul class="list-group mb-3" style="width: 60%;">
+			<li class="list-group-item"><a href="https://www2.cs.sfu.ca/~colour/data/funt_hdr/">Funt et al. HDR Dataset</a></li>
+			<li class="list-group-item"><a href="http://rit-mcsl.org/fairchild//HDRPS/HDRthumbs.html">The HDR Photographic Survey: Thumbnails</a></li>
+			<li class="list-group-item"><a href="http://resources.mpi-inf.mpg.de/hdr/gallery.html">HDR Image and Video Processing -- Max-Planck-Institut für Informatik</a></li>
+			<li class="list-group-item"><a href="http://ivc.univ-nantes.fr/en/databases/ETHyma/">ETHyma Eye tracking data for HDR and Tone Mapped images</a></li>
+			<li class="list-group-item"><a href="http://scarlet.stanford.edu/~brian/hdr/hdr.html">High Dynamic Range Imaging of Natural Scenes</a></li>
+			<li class="list-group-item"><a href="https://syns.soton.ac.uk/">SYNS DATASET</a></li>
+			<li class="list-group-item"><a href="http://pfstools.sourceforge.net/hdr_gallery.html">HDR Image Gallery
+</a></li>
+			<li class="list-group-item"><a href="https://ece.uwaterloo.ca/~z70wang/research/tmqi/">Subject-rated image database of tone-mapped images</a></li>
+			<li class="list-group-item"><a href="https://zenodo.org/record/1245790#.Xt6ugEVKhPY">HDR Vault Image Set
+</a></li>
+			<li class="list-group-item"><a href="https://github.com/AcademySoftwareFoundation/openexr-images">openexr-images
+</a></li>
+			<li class="list-group-item"><a href="http://indoor.hdrdb.com/">The Laval Indoor HDR Dataset</a></li>
+		</ul>
+
+		<h4>LDR Dataset</h4>
+		<blockquote class="blockquote">
+			<p class="mb-0">Most of the HDR datasets are un-labelled, that is, don't have the ground-truth LDR images. We use the <a href="https://github.com/banterle/HDR_Toolbox">HDR ToolBox</a> to generate "ground-truth" LDR images. The details is: for each HDR image, we use all TMOs provided by HDR ToolBox to generate a list of LDR candidates, and choose the one with highest TMQI as "ground-truth" LDR image.</p>
+		</blockquote>
 		<hr>
 		<h2>Network</h2>
 		<h4>Network Structure</h4>
@@ -271,7 +308,7 @@
 	
 
 	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3h46lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
 </body>
 </html>
