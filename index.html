@@ -29,7 +29,24 @@
 		<blockquote class="blockquote">
 			<p class="mb-0">Most images use 8-bit to represent 1 pixel for each of RGB channels, the dynamic range of such images is 255, and they are categorized as LDR images. Some images use 16, 32 or even more bits to represent 1 pixel, such images are categorized as HDR images. Though HDR images more accurately match with the scene they are intended to represent, most common displays are unable to display such images, therefore, such images must be converted from HDR to LDR before displaying.</p>
 		</blockquote>
-		<div class="row"></div>
+		<div class="row d-flex justify-content-around">			
+			<div class="container col-xs-7 col-md-3">
+				<div class="card p-0 m-1">
+					<img src="https://github.com/caoxingdong/adTMO/blob/master/imgs/hdrldr/hdr.png?raw=true" class="card-img-top" alt="...">
+					<div class="card-body py-1">
+						<p class="text-center my-0">HDR image (linearly normalized)</p>
+					</div>
+				</div>
+			</div>	
+			<div class="container col-xs-7 col-md-3">
+				<div class="card p-0 m-1">
+					<img src="https://github.com/caoxingdong/adTMO/blob/master/imgs/hdrldr/ldr.png?raw=true" class="card-img-top" alt="...">
+					<div class="card-body py-1">
+						<p class="text-center my-0">LDR image</p>
+					</div>
+				</div>
+			</div>		
+		</div>
 		<h4>Tone Mapping Operators (TMOs)</h4>
 		<h4>Tone-Mapped Image Quality Index (TMQI)</h4>
 		<hr>
