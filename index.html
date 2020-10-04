@@ -27,18 +27,19 @@
 		</blockquote>
 		<h4>High Dynamic Range (HDR) Images and Ligh Dynamic Range (LDR) Images</h4>
 		<blockquote class="blockquote">
-			<p class="mb-0">Most images use 8-bit to represent 1 pixel for each of RGB channels, the dynamic range of such images is 255, and they are categorized as LDR images. Some images use 16, 32 or even more bits to represent 1 pixel, such images are categorized as HDR images. Though HDR images more accurately match with the scene they are intended to represent, most common displays are unable to display such images, therefore, such images must be converted from HDR to LDR before displaying.</p>
+			<p class="mb-0">Most images use 8-bit to represent per pixel for each of RGB channels, the dynamic range of such images is 255, and they are categorized as LDR images. Some images use 16, 32 or even more bits to represent per pixel, such images are categorized as HDR images. Though HDR images more accurately match with the scene they are intended to represent, most common displays are unable to display such images, therefore, such images must be converted from HDR to LDR before displaying.</p>
 		</blockquote>
 		<div class="row d-flex justify-content-around">			
-			<div class="container col-xs-7 col-md-3">
+			<div class="container col-xs-7 col-md-4">
 				<div class="card p-0 m-1">
 					<img src="https://github.com/caoxingdong/adTMO/blob/master/imgs/hdrldr/hdr.png?raw=true" class="card-img-top" alt="...">
 					<div class="card-body py-1">
-						<p class="text-center my-0">HDR image (linearly normalized)</p>
+						<p class="text-center my-0">HDR image</p>
+						<p class="text-center my-0">(linearly normalized)</p>
 					</div>
 				</div>
 			</div>	
-			<div class="container col-xs-7 col-md-3">
+			<div class="container col-xs-7 col-md-4">
 				<div class="card p-0 m-1">
 					<img src="https://github.com/caoxingdong/adTMO/blob/master/imgs/hdrldr/ldr.png?raw=true" class="card-img-top" alt="...">
 					<div class="card-body py-1">
@@ -48,7 +49,13 @@
 			</div>		
 		</div>
 		<h4>Tone Mapping Operators (TMOs)</h4>
+		<blockquote class="blockquote">
+			<p class="mb-0">Tone mapping is one of the common methods to convert HDR images into LDR images. In the past 20 years, several tone mapping operators (TMOs) have been designed, and have shown success in some specific applications.</p>
+		</blockquote>
 		<h4>Tone-Mapped Image Quality Index (TMQI)</h4>
+		<blockquote class="blockquote">
+			<p class="mb-0">TMQI is one of the objective metrics to evaluate the performance of tone-mapped images. It represents a form of indexing that considers the naturalness of tone-mapped LDR images, and structural fidelity of HDR and tone-mapped LDR images.</p>
+		</blockquote>
 		<hr>
 		<h2>Dataset</h2>
 		<h4>HDR Dataset</h4>
@@ -90,21 +97,31 @@
 		<div class="card mb-1" style="width: 100%;">
 			<img src="https://github.com/caoxingdong/adTMO/blob/master/imgs/newtork_and_scheme/G.png?raw=true" class="card-img-top" alt="...">
 			<div class="card-body">
-			    <p class="card-title text-center " style="font-weight: bold;">Training process of adTMO</p>
-			    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+			    <p class="card-title text-center " style="font-weight: bold;">Network structure of Generator</p>
+			    <p class="card-text">Details can be found in our paper.</p>
 		  	</div>
 		</div>
-		<div class="card mb-1" style="width: 100%;">
+		<div class="card mb-3" style="width: 100%;">
 			<img src="https://github.com/caoxingdong/adTMO/blob/master/imgs/newtork_and_scheme/D.png?raw=true" class="card-img-top" alt="...">
 			<div class="card-body">
-			    <p class="card-title text-center " style="font-weight: bold;">Training process of adTMO</p>
-			    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+			    <p class="card-title text-center " style="font-weight: bold;">Network structure of Discriminator</p>
+			    <p class="card-text">Details can be found in our paper.</p>
 		  	</div>
 		</div>
 
 		<h4>Loss Function</h4>
-		<p> When \(a \ne 0\), there are two solutions to \(ax^2 + bx + c = 0\) and they are \[x = {-b \pm \sqrt{b^2-4ac} \over 2a}.\]</p>
-		<p>cGAN loss: \[L_{cGAN} = E_{(x,y)}logD(x,y)\]</p>
+		<blockquote class="blockquote">
+			<p class="mb-0">The loss function we use to train adTMO consists of 3 parts: cGAN loss, feature matching loss and percepture loss. Details can be found in the paper.</p>
+			<p class="mb-0">\[L_{cGAN}(G,D) = E_{(x,y)}logD(x,y) + E_xlog(1-D(x,G(x)))\]</p>
+			<p class="mb-0">\[L_{FM}(G,D) = E_{(x,y)}\sum_{i=1}^{M}[||D^{(i)}(x,y)-D^{(i)}(x,G(x))||_1]\]</p>
+			<p class="mb-0">\[L_{prp}(G) = E_{(x,y)}\sum_{i=1}^{N} {1\over V_i} [||F^{(i)}(y)-F^{(i)}(G(x))||_1]\]</p>
+			
+		</blockquote>
+		
+		<h4>Keras Implementation</h4>
+		<blockquote class="blockquote">
+			<p class="mb-0">Please visit <a href="https://github.com/caoxingdong/adTMO/blob/master/models/model.py">my github repository</a> for keras implementation of adTMO and loss function.</p>
+		</blockquote>
 		<h4>Training and Testing Schemes</h4>
 		<div class="card mb-1" style="width: 100%;">
 			<img src="https://github.com/caoxingdong/adTMO/blob/master/imgs/newtork_and_scheme/train.png?raw=true" class="card-img-top" alt="...">
@@ -307,22 +324,9 @@
 			  		</div>
 				</div>
 			</a>
-
-			<!-- <a href="https://www.ucalgary.ca/btlab/" class="col-xs-12 col-lg-3">
-				<div class="card" style="width: 18rem;">
-					<img src="https://github.com/caoxingdong/adTMO/blob/master/imgs/other/btlab.png?raw=true" class="card-img-top" alt="...">
-					<div class="card-body">
-				    	<p class="card-title">Biometric Technologies Laboratory</p>				    
-			  		</div>
-				</div>
-			</a> -->
 		</div>
-
-
 	</div>
 
-
-	
 
 	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3h46lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
