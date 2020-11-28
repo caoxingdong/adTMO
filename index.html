@@ -1,335 +1,429 @@
 <!DOCTYPE html>
 <html>
+
 <head>
 	<title>adTMO demo</title>
 	<link rel="stylesheet" type="text/css" href="demo.css">
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+		integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 	<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
 	<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
+
 <body>
-	<div class="container">		
+	<div class="container">
 		<h1>adTMO Demo Page</h1>
 		<blockquote class="blockquote">
-			<p class="mb-0">This is the demo page of our accepted paper: Adversarial and Adaptive Tone Mapping Operator for High Dynamic Range Images in <a href="http://www.ieeessci2020.org/">SSCI 2020</a>. (References can be found in the paper)</p>
+			<p class="mb-0">This is the demo page of our accepted paper: Adversarial and Adaptive Tone Mapping Operator
+				for High Dynamic Range Images in <a href="http://www.ieeessci2020.org/">SSCI 2020</a>. (References can
+				be found in the paper)</p>
 		</blockquote>
 
 		<h2>Abstract</h2>
 		<blockquote class="blockquote">
-			<p class="mb-0">This work addresses tone mapping, a common approach to convert high dynamic range (HDR) images into low dynamic range (LDR) images. We approach this problem by using adaptive tone mapping. We propose to deploy a conditional generative adversarial networks to build an adversarial and adaptive tone mapping operator (adTMO) that  converts HDR  into LDR images. We use an objective quality metric called the Tone Mapped Image Quality Index (TMQI) to evaluate our adTMO. Trained with \(256 * 256\) images, adTMO is able to generate \(256 * 256\) and high-resolution \(1024 * 2048\) LDR images. Given \(1024 * 2048\) HDR images, TMQI of the generated LDR images reaches the value of \(0.90 \pm 0.06\), which outperforms all other contemporary tone mapping operators.</p>
-		</blockquote>		
+			<p class="mb-0">This work addresses tone mapping, a common approach to convert high dynamic range (HDR)
+				images into low dynamic range (LDR) images. We approach this problem by using adaptive tone mapping. We
+				propose to deploy a conditional generative adversarial networks to build an adversarial and adaptive
+				tone mapping operator (adTMO) that converts HDR into LDR images. We use an objective quality metric
+				called the Tone Mapped Image Quality Index (TMQI) to evaluate our adTMO. Trained with \(256 * 256\)
+				images, adTMO is able to generate \(256 * 256\) and high-resolution \(1024 * 2048\) LDR images. Given
+				\(1024 * 2048\) HDR images, TMQI of the generated LDR images reaches the value of \(0.90 \pm 0.06\),
+				which outperforms all other contemporary tone mapping operators.</p>
+		</blockquote>
 		<p class="text-right"></p>
 
 		<h2>Introduction</h2>
 		<h4>Dynamic Range</h4>
 		<blockquote class="blockquote">
-			<p class="mb-0">Dynamic range of an image refers to the variation in luminance from the brightest to the darkest areas.</p>
+			<p class="mb-0">Dynamic range of an image refers to the variation in luminance from the brightest to the
+				darkest areas.</p>
 		</blockquote>
 		<h4>High Dynamic Range (HDR) Images and Ligh Dynamic Range (LDR) Images</h4>
 		<blockquote class="blockquote">
-			<p class="mb-0">Most images use 8-bit to represent per pixel for each of RGB channels, the dynamic range of such images is 255, and they are categorized as LDR images. Some images use 16, 32 or even more bits to represent per pixel, such images are categorized as HDR images. Though HDR images more accurately match with the scene they are intended to represent, most common displays are unable to display such images, therefore, such images must be converted from HDR to LDR before displaying.</p>
+			<p class="mb-0">Most images use 8-bit to represent per pixel for each of RGB channels, the dynamic range of
+				such images is 255, and they are categorized as LDR images. Some images use 16, 32 or even more bits to
+				represent per pixel, such images are categorized as HDR images. Though HDR images more accurately match
+				with the scene they are intended to represent, most common displays are unable to display such images,
+				therefore, such images must be converted from HDR to LDR before displaying.</p>
 		</blockquote>
-		<div class="row d-flex justify-content-around">			
+		<div class="row d-flex justify-content-around">
 			<div class="container col-xs-7 col-md-4">
 				<div class="card p-0 m-1">
-					<img src="https://github.com/caoxingdong/adTMO/blob/master/imgs/hdrldr/hdr.png?raw=true" class="card-img-top" alt="...">
+					<img src="https://github.com/caoxingdong/adTMO/blob/master/imgs/hdrldr/hdr.png?raw=true"
+						class="card-img-top" alt="...">
 					<div class="card-body py-1">
 						<p class="text-center my-0">HDR image</p>
 						<p class="text-center my-0">(linearly normalized)</p>
 					</div>
 				</div>
-			</div>	
+			</div>
 			<div class="container col-xs-7 col-md-4">
 				<div class="card p-0 m-1">
-					<img src="https://github.com/caoxingdong/adTMO/blob/master/imgs/hdrldr/ldr.png?raw=true" class="card-img-top" alt="...">
+					<img src="https://github.com/caoxingdong/adTMO/blob/master/imgs/hdrldr/ldr.png?raw=true"
+						class="card-img-top" alt="...">
 					<div class="card-body py-1">
 						<p class="text-center my-0">LDR image</p>
 					</div>
 				</div>
-			</div>		
+			</div>
 		</div>
 		<h4>Tone Mapping Operators (TMOs)</h4>
 		<blockquote class="blockquote">
-			<p class="mb-0">Tone mapping is one of the common methods to convert HDR images into LDR images. In the past 20 years, several tone mapping operators (TMOs) have been designed, and have shown success in some specific applications.</p>
+			<p class="mb-0">Tone mapping is one of the common methods to convert HDR images into LDR images. In the past
+				20 years, several tone mapping operators (TMOs) have been designed, and have shown success in some
+				specific applications.</p>
 		</blockquote>
 		<h4>Tone-Mapped Image Quality Index (TMQI)</h4>
 		<blockquote class="blockquote">
-			<p class="mb-0">TMQI is one of the objective metrics to evaluate the performance of tone-mapped images. It represents a form of indexing that considers the naturalness of tone-mapped LDR images, and structural fidelity of HDR and tone-mapped LDR images.</p>
+			<p class="mb-0">TMQI is one of the objective metrics to evaluate the performance of tone-mapped images. It
+				represents a form of indexing that considers the naturalness of tone-mapped LDR images, and structural
+				fidelity of HDR and tone-mapped LDR images.</p>
 		</blockquote>
 		<hr>
 		<h2>Dataset</h2>
 		<h4>HDR Dataset</h4>
 		<blockquote class="blockquote">
-			<p class="mb-0">All the HDR datasets are collected from Internet and literature reviews. Here I list all the HDR datasets used in this paper.</p>
+			<p class="mb-0">All the HDR datasets are collected from Internet and literature reviews. Here I list all the
+				HDR datasets used in this paper.</p>
 		</blockquote>
 
 		<ul class="list-group mb-3" style="width: 60%;">
-			<li class="list-group-item"><a href="https://www2.cs.sfu.ca/~colour/data/funt_hdr/">Funt et al. HDR Dataset</a></li>
-			<li class="list-group-item"><a href="http://rit-mcsl.org/fairchild//HDRPS/HDRthumbs.html">The HDR Photographic Survey: Thumbnails</a></li>
-			<li class="list-group-item"><a href="http://resources.mpi-inf.mpg.de/hdr/gallery.html">HDR Image and Video Processing -- Max-Planck-Institut für Informatik</a></li>
-			<li class="list-group-item"><a href="http://ivc.univ-nantes.fr/en/databases/ETHyma/">ETHyma Eye tracking data for HDR and Tone Mapped images</a></li>
-			<li class="list-group-item"><a href="http://scarlet.stanford.edu/~brian/hdr/hdr.html">High Dynamic Range Imaging of Natural Scenes</a></li>
+			<li class="list-group-item"><a href="https://www2.cs.sfu.ca/~colour/data/funt_hdr/">Funt et al. HDR
+					Dataset</a></li>
+			<li class="list-group-item"><a href="http://rit-mcsl.org/fairchild//HDRPS/HDRthumbs.html">The HDR
+					Photographic Survey: Thumbnails</a></li>
+			<li class="list-group-item"><a href="http://resources.mpi-inf.mpg.de/hdr/gallery.html">HDR Image and Video
+					Processing -- Max-Planck-Institut für Informatik</a></li>
+			<li class="list-group-item"><a href="http://ivc.univ-nantes.fr/en/databases/ETHyma/">ETHyma Eye tracking
+					data for HDR and Tone Mapped images</a></li>
+			<li class="list-group-item"><a href="http://scarlet.stanford.edu/~brian/hdr/hdr.html">High Dynamic Range
+					Imaging of Natural Scenes</a></li>
 			<li class="list-group-item"><a href="https://syns.soton.ac.uk/">SYNS DATASET</a></li>
 			<li class="list-group-item"><a href="http://pfstools.sourceforge.net/hdr_gallery.html">HDR Image Gallery
-</a></li>
-			<li class="list-group-item"><a href="https://ece.uwaterloo.ca/~z70wang/research/tmqi/">Subject-rated image database of tone-mapped images</a></li>
+				</a></li>
+			<li class="list-group-item"><a href="https://ece.uwaterloo.ca/~z70wang/research/tmqi/">Subject-rated image
+					database of tone-mapped images</a></li>
 			<li class="list-group-item"><a href="https://zenodo.org/record/1245790#.Xt6ugEVKhPY">HDR Vault Image Set
-</a></li>
-			<li class="list-group-item"><a href="https://github.com/AcademySoftwareFoundation/openexr-images">openexr-images
-</a></li>
+				</a></li>
+			<li class="list-group-item"><a
+					href="https://github.com/AcademySoftwareFoundation/openexr-images">openexr-images
+				</a></li>
 			<li class="list-group-item"><a href="http://indoor.hdrdb.com/">The Laval Indoor HDR Dataset</a></li>
 		</ul>
 
 		<h4>LDR Dataset</h4>
 		<blockquote class="blockquote">
-			<p class="mb-0">Most of the HDR datasets are un-labelled, that is, don't have the ground-truth LDR images. We use the <a href="https://github.com/banterle/HDR_Toolbox">HDR ToolBox</a> to generate "ground-truth" LDR images. The details is: for each HDR image, we use all TMOs provided by HDR ToolBox to generate a list of LDR candidates, and choose the one with highest TMQI as "ground-truth" LDR image.</p>
+			<p class="mb-0">Most of the HDR datasets are un-labelled, that is, don't have the ground-truth LDR images.
+				We use the <a href="https://github.com/banterle/HDR_Toolbox">HDR ToolBox</a> to generate "ground-truth"
+				LDR images. The details is: for each HDR image, we use all TMOs provided by HDR ToolBox to generate a
+				list of LDR candidates, and choose the one with highest TMQI as "ground-truth" LDR image.</p>
 		</blockquote>
 		<hr>
 		<h2>Network</h2>
 		<h4>Network Structure</h4>
 		<div class="card mb-1" style="width: 100%;">
-			<img src="https://github.com/caoxingdong/adTMO/blob/master/imgs/newtork_and_scheme/GAN.png?raw=true" class="card-img-top" alt="...">
+			<img src="https://github.com/caoxingdong/adTMO/blob/master/imgs/newtork_and_scheme/GAN.png?raw=true"
+				class="card-img-top" alt="...">
 			<div class="card-body">
-			    <p class="card-title text-center " style="font-weight: bold;">Training process of adTMO</p>
-			    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-		  	</div>
+				<p class="card-title text-center " style="font-weight: bold;">Training process of adTMO</p>
+				<p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+					card's content.</p>
+			</div>
 		</div>
 		<div class="card mb-1" style="width: 100%;">
-			<img src="https://github.com/caoxingdong/adTMO/blob/master/imgs/newtork_and_scheme/G.png?raw=true" class="card-img-top" alt="...">
+			<img src="https://github.com/caoxingdong/adTMO/blob/master/imgs/newtork_and_scheme/G.png?raw=true"
+				class="card-img-top" alt="...">
 			<div class="card-body">
-			    <p class="card-title text-center " style="font-weight: bold;">Network structure of Generator</p>
-			    <p class="card-text">Details can be found in our paper.</p>
-		  	</div>
+				<p class="card-title text-center " style="font-weight: bold;">Network structure of Generator</p>
+				<p class="card-text">Details can be found in our paper.</p>
+			</div>
 		</div>
 		<div class="card mb-3" style="width: 100%;">
-			<img src="https://github.com/caoxingdong/adTMO/blob/master/imgs/newtork_and_scheme/D.png?raw=true" class="card-img-top" alt="...">
+			<img src="https://github.com/caoxingdong/adTMO/blob/master/imgs/newtork_and_scheme/D.png?raw=true"
+				class="card-img-top" alt="...">
 			<div class="card-body">
-			    <p class="card-title text-center " style="font-weight: bold;">Network structure of Discriminator</p>
-			    <p class="card-text">Details can be found in our paper.</p>
-		  	</div>
+				<p class="card-title text-center " style="font-weight: bold;">Network structure of Discriminator</p>
+				<p class="card-text">Details can be found in our paper.</p>
+			</div>
 		</div>
 
 		<h4>Loss Function</h4>
 		<blockquote class="blockquote">
-			<p class="mb-0">The loss function we use to train adTMO consists of 3 parts: cGAN loss, feature matching loss and percepture loss. Details can be found in the paper.</p>
+			<p class="mb-0">The loss function we use to train adTMO consists of 3 parts: cGAN loss, feature matching
+				loss and percepture loss. Details can be found in the paper.</p>
 			<p class="mb-0">\[L_{cGAN}(G,D) = E_{(x,y)}logD(x,y) + E_xlog(1-D(x,G(x)))\]</p>
 			<p class="mb-0">\[L_{FM}(G,D) = E_{(x,y)}\sum_{i=1}^{M}[||D^{(i)}(x,y)-D^{(i)}(x,G(x))||_1]\]</p>
 			<p class="mb-0">\[L_{prp}(G) = E_{(x,y)}\sum_{i=1}^{N} {1\over V_i} [||F^{(i)}(y)-F^{(i)}(G(x))||_1]\]</p>
-			
+
 		</blockquote>
-		
+
 		<h4>Keras Implementation</h4>
 		<blockquote class="blockquote">
-			<p class="mb-0">Please visit <a href="https://github.com/caoxingdong/adTMO/blob/master/models/model.py">my github repository</a> for keras implementation of adTMO and loss function.</p>
+			<p class="mb-0">Please visit <a href="https://github.com/caoxingdong/adTMO/blob/master/models/model.py">my
+					github repository</a> for keras implementation of adTMO and loss function.</p>
 		</blockquote>
 		<h4>Training and Testing Schemes</h4>
 		<div class="card mb-1" style="width: 100%;">
-			<img src="https://github.com/caoxingdong/adTMO/blob/master/imgs/newtork_and_scheme/train.png?raw=true" class="card-img-top" alt="...">
+			<img src="https://github.com/caoxingdong/adTMO/blob/master/imgs/newtork_and_scheme/train.png?raw=true"
+				class="card-img-top" alt="...">
 			<div class="card-body">
-			    <p class="card-title text-center " style="font-weight: bold;">Training process of adTMO</p>
-			    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-		  	</div>
+				<p class="card-title text-center " style="font-weight: bold;">Training process of adTMO</p>
+				<p class="card-text">We deploy 3 different training schemes, and each requires \(256 * 256\) resolution
+					images to train the model.</p>
+			</div>
 		</div>
 		<div class="card mb-1" style="width: 100%;">
-			<img src="https://github.com/caoxingdong/adTMO/blob/master/imgs/newtork_and_scheme/test.png?raw=true" class="card-img-top" alt="...">
+			<img src="https://github.com/caoxingdong/adTMO/blob/master/imgs/newtork_and_scheme/test.png?raw=true"
+				class="card-img-top" alt="...">
 			<div class="card-body">
-			    <p class="card-title text-center " style="font-weight: bold;">Training process of adTMO</p>
-			    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-		  	</div>
+				<p class="card-title text-center " style="font-weight: bold;">Training process of adTMO</p>
+				<p class="card-text">We deploy 4 different testing schemes, to generate \(256 * 256\) and \(1024 *
+					1024\)
+					resolution images.</p>
+			</div>
 		</div>
-		
+
 		<hr>
 		<h2>Results</h2>
 		<div class="row">
 
 			<div class="container col-xs-12 col-md-6 col-lg-3 p-0">
 				<div class="card p-0 m-1">
-					<img src="https://github.com/caoxingdong/adTMO/blob/master/imgs/result_compirason/1/adTMO_9714.png?raw=true" class="card-img-top" alt="...">
+					<img src="https://github.com/caoxingdong/adTMO/blob/master/imgs/result_compirason/1/adTMO_9714.png?raw=true"
+						class="card-img-top" alt="...">
 					<div class="card-body py-1">
 						<p class="text-center my-0" style="font-weight: bold;">adTMO</p>
 						<p class="text-center mb-0">TMQI = 0.97</p>
 					</div>
 				</div>
-			</div>			
+			</div>
 
 			<div class="container col-xs-12 col-md-6 col-lg-3 p-0">
 				<div class="card p-0 m-1">
-					<img src="https://github.com/caoxingdong/adTMO/blob/master/imgs/result_compirason/1/KimKautzConsistentTMO_9692.png?raw=true" class="card-img-top" alt="...">
+					<img src="https://github.com/caoxingdong/adTMO/blob/master/imgs/result_compirason/1/KimKautzConsistentTMO_9692.png?raw=true"
+						class="card-img-top" alt="...">
 					<div class="card-body py-1">
 						<p class="text-center my-0">KimKautzConsistentTMO</p>
 						<p class="text-center mb-0">TMQI = 0.97</p>
 					</div>
 				</div>
-			</div>			
+			</div>
 
 			<div class="container col-xs-12 col-md-6 col-lg-3 p-0">
 				<div class="card p-0 m-1">
-					<img src="https://github.com/caoxingdong/adTMO/blob/master/imgs/result_compirason/1/YPFerwerdaTMO_9234.png?raw=true" class="card-img-top" alt="...">
+					<img src="https://github.com/caoxingdong/adTMO/blob/master/imgs/result_compirason/1/YPFerwerdaTMO_9234.png?raw=true"
+						class="card-img-top" alt="...">
 					<div class="card-body py-1">
 						<p class="text-center my-0">YPFerwerdaTMO</p>
 						<p class="text-center mb-0">TMQI = 0.92</p>
 					</div>
 				</div>
-			</div>	
+			</div>
 
 			<div class="container col-xs-12 col-md-6 col-lg-3 p-0">
 				<div class="card p-0 m-1">
-					<img src="https://github.com/caoxingdong/adTMO/blob/master/imgs/result_compirason/1/AshikhminTMO_9107.png?raw=true" class="card-img-top" alt="...">
+					<img src="https://github.com/caoxingdong/adTMO/blob/master/imgs/result_compirason/1/AshikhminTMO_9107.png?raw=true"
+						class="card-img-top" alt="...">
 					<div class="card-body py-1">
 						<p class="text-center my-0">AshikhminTMO</p>
 						<p class="text-center mb-0">TMQI = 0.91</p>
 					</div>
 				</div>
-			</div>		
+			</div>
 
 			<div class="container col-xs-12 col-md-6 col-lg-3 p-0">
 				<div class="card p-0 m-1">
-					<img src="https://github.com/caoxingdong/adTMO/blob/master/imgs/result_compirason/1/NormalizeTMO_8828.png?raw=true" class="card-img-top" alt="...">
+					<img src="https://github.com/caoxingdong/adTMO/blob/master/imgs/result_compirason/1/NormalizeTMO_8828.png?raw=true"
+						class="card-img-top" alt="...">
 					<div class="card-body py-1">
 						<p class="text-center my-0">NormalizeTMO</p>
 						<p class="text-center mb-0">TMQI = 0.88</p>
 					</div>
 				</div>
-			</div>			
+			</div>
 
 			<div class="container col-xs-12 col-md-6 col-lg-3 p-0">
 				<div class="card p-0 m-1">
-					<img src="https://github.com/caoxingdong/adTMO/blob/master/imgs/result_compirason/1/BruceExpoBlendTMO_8616.png?raw=true" class="card-img-top" alt="...">
+					<img src="https://github.com/caoxingdong/adTMO/blob/master/imgs/result_compirason/1/BruceExpoBlendTMO_8616.png?raw=true"
+						class="card-img-top" alt="...">
 					<div class="card-body py-1">
 						<p class="text-center my-0">BruceExpoBlendTMO</p>
 						<p class="text-center mb-0">TMQI = 0.86</p>
 					</div>
 				</div>
-			</div>			
+			</div>
 
 			<div class="container col-xs-12 col-md-6 col-lg-3 p-0">
 				<div class="card p-0 m-1">
-					<img src="https://github.com/caoxingdong/adTMO/blob/master/imgs/result_compirason/1/tonemapTMO_8616.png?raw=true" class="card-img-top" alt="...">
+					<img src="https://github.com/caoxingdong/adTMO/blob/master/imgs/result_compirason/1/tonemapTMO_8616.png?raw=true"
+						class="card-img-top" alt="...">
 					<div class="card-body py-1">
 						<p class="text-center my-0">MATLAB tonemap function</p>
 						<p class="text-center mb-0">TMQI = 0.86</p>
 					</div>
 				</div>
-			</div>			
+			</div>
 
 			<div class="container col-xs-12 col-md-6 col-lg-3 p-0">
 				<div class="card p-0 m-1">
-					<img src="https://github.com/caoxingdong/adTMO/blob/master/imgs/result_compirason/1/DurandTMO_8538.png?raw=true" class="card-img-top" alt="...">
+					<img src="https://github.com/caoxingdong/adTMO/blob/master/imgs/result_compirason/1/DurandTMO_8538.png?raw=true"
+						class="card-img-top" alt="...">
 					<div class="card-body py-1">
 						<p class="text-center my-0">DurandTMO</p>
 						<p class="text-center mb-0">TMQI = 0.85</p>
 					</div>
 				</div>
-			</div>	
+			</div>
 
 		</div>
 
-
-
 		<div class="row">
-
 			<div class="container col-xs-12 col-md-6 col-lg-3 p-0">
 				<div class="card p-0 m-1">
-					<img src="https://github.com/caoxingdong/adTMO/blob/master/imgs/result_compirason/2/adTMO_9161.png?raw=true" class="card-img-top" alt="...">
+					<img src="https://github.com/caoxingdong/adTMO/blob/master/imgs/result_compirason/2/adTMO_9161.png?raw=true"
+						class="card-img-top" alt="...">
 					<div class="card-body py-1">
 						<p class="text-center my-0" style="font-weight: bold;">adTMO</p>
 						<p class="text-center mb-0">TMQI = 0.92</p>
 					</div>
 				</div>
-			</div>			
+			</div>
 
 			<div class="container col-xs-12 col-md-6 col-lg-3 p-0">
 				<div class="card p-0 m-1">
-					<img src="https://github.com/caoxingdong/adTMO/blob/master/imgs/result_compirason/2/tonemapTMO_8929.png?raw=true" class="card-img-top" alt="...">
+					<img src="https://github.com/caoxingdong/adTMO/blob/master/imgs/result_compirason/2/tonemapTMO_8929.png?raw=true"
+						class="card-img-top" alt="...">
 					<div class="card-body py-1">
 						<p class="text-center my-0">MATLAB tonemap function</p>
 						<p class="text-center mb-0">TMQI = 0.89</p>
 					</div>
 				</div>
-			</div>			
+			</div>
 
 			<div class="container col-xs-12 col-md-6 col-lg-3 p-0">
 				<div class="card p-0 m-1">
-					<img src="https://github.com/caoxingdong/adTMO/blob/master/imgs/result_compirason/2/GammaTMO_8773.png?raw=true" class="card-img-top" alt="...">
+					<img src="https://github.com/caoxingdong/adTMO/blob/master/imgs/result_compirason/2/GammaTMO_8773.png?raw=true"
+						class="card-img-top" alt="...">
 					<div class="card-body py-1">
 						<p class="text-center my-0">GammaTMO</p>
 						<p class="text-center mb-0">TMQI = 0.88</p>
 					</div>
 				</div>
-			</div>	
+			</div>
 
 			<div class="container col-xs-12 col-md-6 col-lg-3 p-0">
 				<div class="card p-0 m-1">
-					<img src="https://github.com/caoxingdong/adTMO/blob/master/imgs/result_compirason/2/YPFerwerdaTMO_8732.png?raw=true" class="card-img-top" alt="...">
+					<img src="https://github.com/caoxingdong/adTMO/blob/master/imgs/result_compirason/2/YPFerwerdaTMO_8732.png?raw=true"
+						class="card-img-top" alt="...">
 					<div class="card-body py-1">
 						<p class="text-center my-0">YPFerwerdaTMO</p>
 						<p class="text-center mb-0">TMQI = 0.87</p>
 					</div>
 				</div>
-			</div>		
+			</div>
 
 			<div class="container col-xs-12 col-md-6 col-lg-3 p-0">
 				<div class="card p-0 m-1">
-					<img src="https://github.com/caoxingdong/adTMO/blob/master/imgs/result_compirason/2/DurandTMO_8354.png?raw=true" class="card-img-top" alt="...">
+					<img src="https://github.com/caoxingdong/adTMO/blob/master/imgs/result_compirason/2/DurandTMO_8354.png?raw=true"
+						class="card-img-top" alt="...">
 					<div class="card-body py-1">
 						<p class="text-center my-0">DurandTMO</p>
 						<p class="text-center mb-0">TMQI = 0.84</p>
 					</div>
 				</div>
-			</div>			
+			</div>
 
 			<div class="container col-xs-12 col-md-6 col-lg-3 p-0">
 				<div class="card p-0 m-1">
-					<img src="https://github.com/caoxingdong/adTMO/blob/master/imgs/result_compirason/2/KrawczykTMO_8415.png?raw=true" class="card-img-top" alt="...">
+					<img src="https://github.com/caoxingdong/adTMO/blob/master/imgs/result_compirason/2/KrawczykTMO_8415.png?raw=true"
+						class="card-img-top" alt="...">
 					<div class="card-body py-1">
 						<p class="text-center my-0">KrawczykTMO</p>
 						<p class="text-center mb-0">TMQI = 0.84</p>
 					</div>
 				</div>
-			</div>			
+			</div>
 
 			<div class="container col-xs-12 col-md-6 col-lg-3 p-0">
 				<div class="card p-0 m-1">
-					<img src="https://github.com/caoxingdong/adTMO/blob/master/imgs/result_compirason/2/LischinskiTMO_8358.png?raw=true" class="card-img-top" alt="...">
+					<img src="https://github.com/caoxingdong/adTMO/blob/master/imgs/result_compirason/2/LischinskiTMO_8358.png?raw=true"
+						class="card-img-top" alt="...">
 					<div class="card-body py-1">
 						<p class="text-center my-0">LischinskiTMO</p>
 						<p class="text-center mb-0">TMQI = 0.84</p>
 					</div>
 				</div>
-			</div>			
+			</div>
 
 			<div class="container col-xs-12 col-md-6 col-lg-3 p-0">
 				<div class="card p-0 m-1">
-					<img src="https://github.com/caoxingdong/adTMO/blob/master/imgs/result_compirason/2/SchlickTMO_8372.png?raw=true" class="card-img-top" alt="...">
+					<img src="https://github.com/caoxingdong/adTMO/blob/master/imgs/result_compirason/2/SchlickTMO_8372.png?raw=true"
+						class="card-img-top" alt="...">
 					<div class="card-body py-1">
 						<p class="text-center my-0">SchlickTMO</p>
 						<p class="text-center mb-0">TMQI = 0.84</p>
 					</div>
 				</div>
-			</div>	
+			</div>
 
 		</div>
 
 		<hr>
 		<h2>Conclusion</h2>
+		<blockquote class="blockquote">
+			<p class="mb-0">
+				We propose an adversarial and adaptive tone mapping operator (adTMO):
+			<ul>
+				<li>
+					is based on cGAN
+				</li>
+				<li>
+					can adaptively tone mapping HDR images with different contents
+				</li>
+				<li>
+					has new Training/Testing Schemes:
+					<ul>
+						<li>
+							training using low-resolution images
+						</li>
+						<li>
+							evaluating using low and high-resolution images
+						</li>
+					</ul>
+				</li>
+
+			</ul>
+			</p>
+			<p class="mb-0">The Tone-Mapped Image Quality Index (TMQI) of adTMO is 0.90 ±0.06, higher than other TMOs.
+			</p>
+		</blockquote>
+
 		<hr>
 		<h2>Other Links</h2>
 
 		<div class="row d-flex justify-content-around">
 			<a href="https://www.ucalgary.ca/btlab/" class="col-xs-12 col-lg-3 mb-3">
 				<div class="card" style="width: 18rem;">
-					<img src="https://github.com/caoxingdong/adTMO/blob/master/imgs/other/btlab.png?raw=true" class="card-img-top" alt="...">
+					<img src="https://github.com/caoxingdong/adTMO/blob/master/imgs/other/btlab.png?raw=true"
+						class="card-img-top" alt="...">
 					<div class="card-body">
-				    	<p class="card-title">Biometric Technologies Laboratory</p>				    
-			  		</div>
+						<p class="card-title">Biometric Technologies Laboratory</p>
+					</div>
 				</div>
 			</a>
 		</div>
 	</div>
 
 
-	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3h46lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
-	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+		integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+		crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+		integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3h46lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+		crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+		integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+		crossorigin="anonymous"></script>
 </body>
+
 </html>
